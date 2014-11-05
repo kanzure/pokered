@@ -1,2 +1,2 @@
 _BLUE EQU 1
-_RED  EQU 0
+INCLUDE "charmap.asm"

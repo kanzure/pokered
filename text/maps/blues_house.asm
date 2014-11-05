@@ -14,7 +14,7 @@ _DaisyOfferMapText::
 _GotMapText::
 	text $52," got a"
 	line "@"
-	TX_RAM $CF4B
+	TX_RAM wcf4b
 	text "!@@"
 
 _DaisyBagFullText::
@@ -29,11 +29,19 @@ _DaisyUseMapText::
 	done
 
 _BluesHouseText2::
+IF DEF(_YELLOW)
+	text "Spending time"
+	line "with your #MON"
+	cont "makes them more"
+	cont "friendly to you."
+	done
+ELSE
 	text "#MON are living"
 	line "things! If they"
 	cont "get tired, give"
 	cont "them a rest!"
 	done
+ENDC
 
 _BluesHouseText3::
 	text "It's a big map!"

@@ -1,4 +1,4 @@
-_UnnamedText_59ded:: ; 82454 (20:6454)
+_SilphCo2Text_59ded:: ; 82454 (20:6454)
 	text "Eeek!"
 	line "No! Stop! Help!"
 
@@ -12,7 +12,7 @@ _UnnamedText_59ded:: ; 82454 (20:6454)
 _ReceivedTM36Text:: ; 824ba (20:64ba)
 	text $52, " got"
 	line "@"
-	TX_RAM $cf4b
+	TX_RAM wcf4b
 	text "!@@"
 
 _TM36ExplanationText:: ; 824c9 (20:64c9)
@@ -72,7 +72,11 @@ _SilphCo2EndBattleText3:: ; 8260f (20:660f)
 	prompt
 
 _SilphCo2AfterBattleText3:: ; 82617 (20:6617)
+IF DEF(_YELLOW)
+	text "Diamond-shaped"
+ELSE
 	text "Diamond shaped"
+ENDC
 	line "tiles are"
 	cont "teleport blocks!"
 

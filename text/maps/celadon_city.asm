@@ -1,10 +1,18 @@
 _CeladonCityText1:: ; a59fb (29:59fb)
 	text "I got my KOFFING"
+IF DEF(_YELLOW)
+	line "from my friend!"
+
+	para "We get along now,"
+	line "because I was"
+	cont "very nice to it!"
+ELSE
 	line "in CINNABAR!"
 
 	para "It's nice, but it"
 	line "breathes poison"
 	cont "when it's angry!"
+ENDC
 	done
 
 _CeladonCityText2:: ; a5a4b (29:5a4b)
@@ -42,7 +50,7 @@ _TM41PreText:: ; a5afd (29:5afd)
 _ReceivedTM41Text:: ; a5b5a (29:5b5a)
 	text $52, " received"
 	line "@"
-	TX_RAM $cf4b
+	TX_RAM wcf4b
 	text "!@@"
 
 _TM41ExplanationText:: ; a5b6e (29:5b6e)
@@ -111,7 +119,11 @@ _CeladonCityText13:: ; a5d41 (29:5d41)
 	line "#MON GYM"
 	cont "LEADER: ERIKA"
 
+IF DEF(_YELLOW)
+	para "The Nature-Loving"
+ELSE
 	para "The Nature Loving"
+ENDC
 	line "Princess!"
 	done
 
@@ -148,6 +160,10 @@ _CeladonCityText17:: ; a5e3e (29:5e3e)
 _CeladonCityText18:: ; a5e6a (29:5e6a)
 	text "ROCKET GAME CORNER"
 	line "The playground"
+IF DEF(_YELLOW)
+	cont "for grownups!"
+ELSE
 	cont "for grown-ups!"
+ENDC
 	done
 

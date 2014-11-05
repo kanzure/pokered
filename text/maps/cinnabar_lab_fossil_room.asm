@@ -1,4 +1,4 @@
-_UnnamedText_75dc6:: ; a10e8 (28:50e8)
+_Lab4Text_75dc6:: ; a10e8 (28:50e8)
 	text "Hiya!"
 
 	para "I am important"
@@ -11,11 +11,11 @@ _UnnamedText_75dc6:: ; a10e8 (28:50e8)
 	line "fossil for me?"
 	prompt
 
-_UnnamedText_75dcb:: ; a1145 (28:5145)
+_Lab4Text_75dcb:: ; a1145 (28:5145)
 	text "No! Is too bad!"
 	done
 
-_UnnamedText_75dd0:: ; a1156 (28:5156)
+_Lab4Text_75dd0:: ; a1156 (28:5156)
 	text "I take a little"
 	line "time!"
 
@@ -23,27 +23,27 @@ _UnnamedText_75dd0:: ; a1156 (28:5156)
 	line "little while!"
 	done
 
-_UnnamedText_75dd5:: ; a118d (28:518d)
+_Lab4Text_75dd5:: ; a118d (28:518d)
 	text "Where were you?"
 
 	para "Your fossil is"
 	line "back to life!"
 
 	para "It was @"
-	TX_RAM $cf4b
+	TX_RAM wcf4b
 	db $0
 	line "like I think!"
 	prompt
 
-_UnnamedText_610ae:: ; a11d6 (28:51d6)
+_Lab4Text_610ae:: ; a11d6 (28:51d6)
 	text "Oh! That is"
 	line "@"
-	TX_RAM $cd6d
+	TX_RAM wcd6d
 	text "!"
 
 	para "It is fossil of"
 	line "@"
-	TX_RAM $cf4b
+	TX_RAM wcf4b
 	text ", a"
 	cont "#MON that is"
 	cont "already extinct!"
@@ -54,17 +54,17 @@ _UnnamedText_610ae:: ; a11d6 (28:51d6)
 	cont "again!"
 	done
 
-_UnnamedText_610b3:: ; a1259 (28:5259)
+_Lab4Text_610b3:: ; a1259 (28:5259)
 	text "So! You hurry and"
 	line "give me that!"
 
 	para $52, " handed"
 	line "over @"
-	TX_RAM $cd6d
+	TX_RAM wcd6d
 	text "!"
 	prompt
 
-_UnnamedText_610b8:: ; a128f (28:528f)
+_Lab4Text_610b8:: ; a128f (28:528f)
 	text "I take a little"
 	line "time!"
 
@@ -72,7 +72,7 @@ _UnnamedText_610b8:: ; a128f (28:528f)
 	line "little while!"
 	done
 
-_UnnamedText_610bd:: ; a12c6 (28:52c6)
+_Lab4Text_610bd:: ; a12c6 (28:52c6)
 	text "Aiyah! You come"
 	line "again!"
 	done

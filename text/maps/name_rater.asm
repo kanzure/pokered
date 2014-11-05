@@ -1,4 +1,4 @@
-_UnnamedText_1dab3:: ; 9a308 (26:6308)
+_NameRaterText_1dab3:: ; 9a308 (26:6308)
 	text "Hello, hello!"
 	line "I am the official"
 	cont "NAME RATER!"
@@ -8,13 +8,13 @@ _UnnamedText_1dab3:: ; 9a308 (26:6308)
 	cont "your #MON?"
 	done
 
-_UnnamedText_1dab8:: ; 9a361 (26:6361)
+_NameRaterText_1dab8:: ; 9a361 (26:6361)
 	text "Which #MON"
 	line "should I look at?"
 	prompt
 
-_UnnamedText_1dabd:: ; 9a37f (26:637f)
-	TX_RAM $cd6d
+_NameRaterText_1dabd:: ; 9a37f (26:637f)
+	TX_RAM wcd6d
 	text ", is it?"
 	line "That is a decent"
 	cont "nickname!"
@@ -26,36 +26,40 @@ _UnnamedText_1dabd:: ; 9a37f (26:637f)
 	para "How about it?"
 	done
 
-_UnnamedText_1dac2:: ; 9a3e5 (26:63e5)
+_NameRaterText_1dac2:: ; 9a3e5 (26:63e5)
 	text "Fine! What should"
 	line "we name it?"
 	prompt
 
-_UnnamedText_1dac7:: ; 9a404 (26:6404)
+_NameRaterText_1dac7:: ; 9a404 (26:6404)
 	text "OK! This #MON"
 	line "has been renamed"
 	cont "@"
-	TX_RAM $cee9
+	TX_RAM wHPBarMaxHP
 	text "!"
 
 	para "That's a better"
 	line "name than before!"
 	done
 
-_UnnamedText_1dacc:: ; 9a44c (26:644c)
+_NameRaterText_1dacc:: ; 9a44c (26:644c)
+IF DEF(_YELLOW)
+	text "Fine! Come any-"
+ELSE
 	text "Fine! Come any"
+ENDC
 	line "time you like!"
 	done
 
-_UnnamedText_1dad1:: ; 9a46b (26:646b)
-	TX_RAM $cd6d
+_NameRaterText_1dad1:: ; 9a46b (26:646b)
+	TX_RAM wcd6d
 	text ", is it?"
 	line "That is a truly"
 	cont "impeccable name!"
 
 	para "Take good care of"
 	line "@"
-	TX_RAM $cd6d
+	TX_RAM wcd6d
 	text "!"
 	done
 

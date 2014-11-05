@@ -1,16 +1,36 @@
-_UnnamedText_59bb7:: ; 9a572 (26:6572)
+PikachuFanText::
 	text "Won't you admire"
+IF DEF(_YELLOW)
+	line "my CLEFAIRY's"
+ELSE
 	line "my PIKACHU's"
+ENDC
 	cont "adorable tail?"
 	done
 
-_UnnamedText_59bbc:: ; 9a59e (26:659e)
+PikachuFanBetterText::
+IF DEF(_YELLOW)
+	text "Humph! My CLEFAIRY"
+ELSE
 	text "Humph! My PIKACHU"
+ENDC
 	line "is twice as cute"
 	cont "as that one!"
 	done
 
-_UnnamedText_59be4:: ; 9a5cf (26:65cf)
+IF DEF(_YELLOW)
+PikachuFanPrintText::
+	text "Our CHAIRMAN's new"
+	line "hobby is taking"
+	cont "#MON photos."
+
+	para "He gave me a nice"
+	line "PRINT of my cute"
+	cont "CLEFAIRY."
+	done
+ENDC
+
+SeelFanText::
 	text "I just love my"
 	line "SEEL!"
 
@@ -18,28 +38,47 @@ _UnnamedText_59be4:: ; 9a5cf (26:65cf)
 	line "hug it!"
 	done
 
-_UnnamedText_59be9:: ; 9a5ff (26:65ff)
+SeelFanBetterText::
 	text "Oh dear!"
 
 	para "My SEEL is far"
 	line "more attractive!"
 	done
 
-_UnnamedText_59c00:: ; 9a629 (26:6629)
+IF DEF(_YELLOW)
+SeelFanPrintText::
+	text "I'm going to hook"
+	line "up the cable to"
+	cont "get a photo PRINT"
+	cont "of my SEEL!"
+	done
+ENDC
+
+FanClubPikachuText::
+IF DEF(_YELLOW)
+	text "CLEFAIRY: Pippii!"
+ELSE
 	text "PIKACHU: Chu!"
 	line "Pikachu!"
+ENDC
 	done
 
-_UnnamedText_59c17:: ; 9a641 (26:6641)
+FanClubSeelText::
 	text "SEEL: Kyuoo!"
 	done
 
-_UnnamedText_59c65:: ; 9a64f (26:664f)
+FanClubMeetChairText::
 	text "I chair the"
 	line "#MON Fan Club!"
 
+IF DEF(_YELLOW)
+	para "I have more than"
+	line "100 #MON. I"
+	cont "love them all!"
+ELSE
 	para "I have collected"
 	line "over 100 #MON!"
+ENDC
 
 	para "I'm very fussy"
 	line "when it comes to"
@@ -47,12 +86,17 @@ _UnnamedText_59c65:: ; 9a64f (26:664f)
 
 	para "So..."
 
+IF DEF(_YELLOW)
+	para "Did you come to"
+	line "hear me brag"
+ELSE
 	para "Did you come"
 	line "visit to hear"
+ENDC
 	cont "about my #MON?"
 	done
 
-_UnnamedText_59c6a:: ; 9a6e0 (26:66e0)
+FanClubChairStoryText::
 	text "Good!"
 	line "Then listen up!"
 
@@ -82,13 +126,13 @@ _UnnamedText_59c6a:: ; 9a6e0 (26:66e0)
 	cont "you to have this!"
 	prompt
 
-_ReceivedBikeVoucherText:: ; 9a82e (26:682e)
+ReceivedBikeVoucherText::
 	text $52, " received"
 	line "a @"
-	TX_RAM $cf4b
+	TX_RAM wcf4b
 	text "!@@"
 
-_UnnamedText_59c74:: ; 9a844 (26:6844)
+ExplainBikeVoucherText::
 	db $0
 	para "Exchange that for"
 	line "a BICYCLE!"
@@ -104,13 +148,13 @@ _UnnamedText_59c74:: ; 9a844 (26:6844)
 	line "cycling!"
 	done
 
-_UnnamedText_59c79:: ; 9a8c3 (26:68c3)
+FanClubNoStoryText::
 	text "Oh. Come back"
 	line "when you want to"
 	cont "hear my story!"
 	done
 
-_UnnamedText_59c7e:: ; 9a8f2 (26:68f2)
+FanClubChairFinalText::
 	text "Hello, ", $52, "!"
 
 	para "Did you come see"
@@ -120,13 +164,48 @@ _UnnamedText_59c7e:: ; 9a8f2 (26:68f2)
 	para "No? Too bad!"
 	done
 
-_UnnamedText_59c83:: ; 9a933 (26:6933)
+FanClubBagFullText::
 	text "Make room for"
 	line "this!"
 	done
 
+IF DEF(_YELLOW)
+FanClubChairPrintText1::
+	text "Hi there, ",$52,"!"
+	line "Have you seen my"
+	cont "#MON photos?"
+
+	para "I have them framed"
+	line "up on that wall."
+
+	para "Ah, I know!"
+
+	para "Would you like me"
+	line "to take a photo"
+	cont "of your #MON?"
+	done
+
+FanClubChairPrintText2::
+	text "No? That's really"
+	line "disappointing."
+	done
+
+FanClubChairPrintText3::
+	text "OK, I'm done."
+	done
+
+FanClubChairPrintText4::
+	text "Maybe we won't"
+	line "PRINT this now."
+	done
+ENDC
+
 _FanClubText6:: ; 9a948 (26:6948)
+IF DEF(_YELLOW)
+	text "Our CHAIRMAN is"
+ELSE
 	text "Our Chairman is"
+ENDC
 	line "very vocal about"
 	cont "#MON."
 	done

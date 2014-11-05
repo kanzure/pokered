@@ -11,17 +11,85 @@ page   EQUS "db $49,"     ; Start a new Pokedex page.
 dex    EQUS "db $5f, $50" ; End a Pokedex entry.
 
 
+percent EQUS "* $ff / 100"
+
+
+; Constant enumeration is useful for monsters, items, moves, etc.
+const_def: MACRO
+const_value = 0
+ENDM
+
+const: MACRO
+\1 EQU const_value
+const_value = const_value + 1
+ENDM
+
+
+homecall: MACRO
+	ld a, [H_LOADEDROMBANK]
+	push af
+	ld a, BANK(\1)
+	ld [H_LOADEDROMBANK], a
+	ld [MBC1RomBank], a
+	call \1
+	pop af
+	ld [H_LOADEDROMBANK], a
+	ld [MBC1RomBank], a
+	ENDM
+
+callba: MACRO
+	ld b, BANK(\1)
+	ld hl, \1
+	call Bankswitch
+	ENDM
+
+callab: MACRO
+	ld hl, \1
+	ld b, BANK(\1)
+	call Bankswitch
+	ENDM
+
 ;\1 = X
 ;\2 = Y
-FuncCoord: MACRO
-Coord = $C3A0 + 20 * \2 + \1
+hlCoord: MACRO
+	ld hl, wTileMap + 20 * \2 + \1
+	ENDM
+
+;\1 = X
+;\2 = Y
+deCoord: MACRO
+	ld de, wTileMap + 20 * \2 + \1
+	ENDM
+
+;\1 = X
+;\2 = Y
+bcCoord: MACRO
+	ld bc, wTileMap + 20 * \2 + \1
+	ENDM
+
+;\1 = X
+;\2 = Y
+aCoord: MACRO
+	ld a, [wTileMap + 20 * \2 + \1]
+	ENDM
+
+;\1 = X
+;\2 = Y
+Coorda: MACRO
+	ld [wTileMap + 20 * \2 + \1], a
+	ENDM
+
+;\1 = X
+;\2 = Y
+dwCoord: MACRO
+	dw wTileMap + 20 * \2 + \1
 	ENDM
 
 ;\1 = Map Width
 ;\2 = Rows above (Y-blocks)
 ;\3 = X movement (X-blocks)
 EVENT_DISP: MACRO
-	dw ($C6EF + (\1) + ((\1) + 6) * ((\2) >> 1) + ((\3) >> 1)) ; Ev.Disp
+	dw (wOverworldMap + 7 + (\1) + ((\1) + 6) * ((\2) >> 1) + ((\3) >> 1)) ; Ev.Disp
 	db \2,\3	;Y,X
 	ENDM
 
@@ -54,12 +122,18 @@ IMAP: MACRO ; imap mapid_less_than,x-coordinate,y-coordinate,textpointer
 	ENDM
 
 ; tilesets' headers macro
-TSETHEAD: MACRO
-	db BANK(\2)
-	dw \1,\2,\3
-	db \4,\5,\6,\7,\8
+tileset: MACRO
+	db BANK(\2)   ; BANK(GFX)
+	dw \1, \2, \3 ; Block, GFX, Coll
+	db \4, \5, \6 ; counter tiles
+	db \7         ; grass tile
+	db \8         ; permission (indoor, cave, outdoor)
 	ENDM
-	
+
+INDOOR  EQU 0
+CAVE    EQU 1
+OUTDOOR EQU 2
+
 ; macro for two nibbles
 dn: MACRO
 	db (\1 << 4 | \2)
@@ -101,17 +175,51 @@ TX_RAM: MACRO
 	dw \1
 	ENDM
 
+TX_BCD: MACRO
+	db $2
+	dw \1
+	db \2
+	ENDM
+
 ; Predef macro.
-PREDEF: MACRO
-	ld a, (\1 - PredefPointers) / 3
+add_predef: MACRO
+\1Predef::
+	db BANK(\1)
+	dw \1
+	ENDM
+
+predef_id: MACRO
+	ld a, (\1Predef - PredefPointers) / 3
+	ENDM
+
+predef: MACRO
+	predef_id \1
 	call Predef
 	ENDM
-	
-PREDEF_JUMP: MACRO
-	ld a, (\1 - PredefPointers) / 3
+
+predef_jump: MACRO
+	predef_id \1
 	jp Predef
 	ENDM
 
+
+add_tx_pre: MACRO
+\1_id:: dw \1
+ENDM
+
+tx_pre_id: MACRO
+	ld a, (\1_id - TextPredefs) / 2
+ENDM
+
+tx_pre: MACRO
+	tx_pre_id \1
+	call PrintPredefTextID
+ENDM
+
+tx_pre_jump: MACRO
+	tx_pre_id \1
+	jp PrintPredefTextID
+ENDM
 
 
 ;1_channel	EQU $00
@@ -127,41 +235,6 @@ CH4		EQU 4
 CH5		EQU 5
 CH6		EQU 6
 CH7		EQU 7
-
-;Note Pitch
-C_		EQU $0
-C#		EQU $1
-D_		EQU $2
-D#		EQU $3
-E_		EQU $4
-F_		EQU $5
-F#		EQU $6
-G_		EQU $7
-G#		EQU $8
-A_		EQU $9
-A#		EQU $A
-B_		EQU $B
-
-;drum instruments
-snare1		EQU $01
-snare2		EQU $02
-snare3		EQU $03
-snare4		EQU $04
-snare5		EQU $05
-triangle1	EQU $06
-triangle2	EQU $07
-snare6		EQU $08
-snare7		EQU $09
-snare8		EQU $0a
-snare9		EQU $0b
-cymbal1		EQU $0c
-cymbal2		EQU $0d
-cymbal3		EQU $0e
-mutedsnare1	EQU $0f
-triangle3	EQU $10
-mutedsnare2	EQU $11
-mutedsnare3	EQU $12
-mutedsnare4	EQU $13
 
 unknownsfx0x10: MACRO
 	db $10
@@ -181,15 +254,149 @@ unknownnoise0x20: MACRO
 	db \3
 ENDM
 
-;format: note pitch, length (in 16ths)
-note: MACRO
-	db (\1 << 4) | (\2 - 1)
+;format: pitch length (in 16ths)
+C_: MACRO
+	db $00 | (\1 - 1)
 ENDM
 
-;format: dnote length (in 16ths), instrument
-dnote: MACRO
+C#: MACRO
+	db $10 | (\1 - 1)
+ENDM
+
+D_: MACRO
+	db $20 | (\1 - 1)
+ENDM
+
+D#: MACRO
+	db $30 | (\1 - 1)
+ENDM
+
+E_: MACRO
+	db $40 | (\1 - 1)
+ENDM
+
+F_: MACRO
+	db $50 | (\1 - 1)
+ENDM
+
+F#: MACRO
+	db $60 | (\1 - 1)
+ENDM
+
+G_: MACRO
+	db $70 | (\1 - 1)
+ENDM
+
+G#: MACRO
+	db $80 | (\1 - 1)
+ENDM
+
+A_: MACRO
+	db $90 | (\1 - 1)
+ENDM
+
+A#: MACRO
+	db $A0 | (\1 - 1)
+ENDM
+
+B_: MACRO
 	db $B0 | (\1 - 1)
-	db \2
+ENDM
+
+;format: instrument length (in 16ths)
+snare1: MACRO
+	db $B0 | (\1 - 1)
+	db $01
+ENDM
+
+snare2: MACRO
+	db $B0 | (\1 - 1)
+	db $02
+ENDM
+
+snare3: MACRO
+	db $B0 | (\1 - 1)
+	db $03
+ENDM
+
+snare4: MACRO
+	db $B0 | (\1 - 1)
+	db $04
+ENDM
+
+snare5: MACRO
+	db $B0 | (\1 - 1)
+	db $05
+ENDM
+
+triangle1: MACRO
+	db $B0 | (\1 - 1)
+	db $06
+ENDM
+
+triangle2: MACRO
+	db $B0 | (\1 - 1)
+	db $07
+ENDM
+
+snare6: MACRO
+	db $B0 | (\1 - 1)
+	db $08
+ENDM
+
+snare7: MACRO
+	db $B0 | (\1 - 1)
+	db $09
+ENDM
+
+snare8: MACRO
+	db $B0 | (\1 - 1)
+	db $0A
+ENDM
+
+snare9: MACRO
+	db $B0 | (\1 - 1)
+	db $0B
+ENDM
+
+cymbal1: MACRO
+	db $B0 | (\1 - 1)
+	db $0C
+ENDM
+
+cymbal2: MACRO
+	db $B0 | (\1 - 1)
+	db $0D
+ENDM
+
+cymbal3: MACRO
+	db $B0 | (\1 - 1)
+	db $0E
+ENDM
+
+mutedsnare1: MACRO
+	db $B0 | (\1 - 1)
+	db $0F
+ENDM
+
+triangle3: MACRO
+	db $B0 | (\1 - 1)
+	db $10
+ENDM
+
+mutedsnare2: MACRO
+	db $B0 | (\1 - 1)
+	db $11
+ENDM
+
+mutedsnare3: MACRO
+	db $B0 | (\1 - 1)
+	db $12
+ENDM
+
+mutedsnare4: MACRO
+	db $B0 | (\1 - 1)
+	db $13
 ENDM
 
 ;format: rest length (in 16ths)
@@ -211,7 +418,7 @@ octave: MACRO
 	db $E8 - \1
 ENDM
 
-togglecall: MACRO
+toggleperfectpitch: MACRO
 	db $E8
 ENDM
 
@@ -235,18 +442,18 @@ ENDM
 
 tempo: MACRO
 	db $ED
-	db \1
-	db \2
+	db \1 / $100
+	db \1 % $100
 ENDM
 
-unknownmusic0xee: MACRO
+stereopanning: MACRO
 	db $EE
 	db \1
 ENDM
 
-stereopanning: MACRO
+volume: MACRO
 	db $F0
-	db \1
+	db (\1 << 4) | \2
 ENDM
 
 executemusic: MACRO
@@ -259,21 +466,22 @@ dutycycle: MACRO
 ENDM
 
 ;format: callchannel address
-;callchannel: MACRO
-;	db $FD
-;	dw \1
-;ENDM
+callchannel: MACRO
+	db $FD
+	dw \1
+ENDM
 
 ;format: loopchannel count, address
-;loopchannel: MACRO
-;	db $FE
-;	db \1
-;	dw \2
-;ENDM
+loopchannel: MACRO
+	db $FE
+	db \1
+	dw \2
+ENDM
 
 endchannel: MACRO
 	db $FF
 ENDM
+
 
 ;\1 (byte) = connected map id
 ;\2 (byte) = connected map width
@@ -285,12 +493,12 @@ ENDM
 NORTH_MAP_CONNECTION: MACRO
 	db \1 ; map id
 	dw \7 + (\2 * (\3 - 3)) + \5; "Connection Strip" location
-	dw $C6EB + \4 ; current map position
+	dw wOverworldMap + 3 + \4 ; current map position
 	db \6 ; width of connection strip
 	db \2 ; map width
 	db (\3 * 2) - 1 ; y alignment (y coordinate of player when entering map)
 	db (\4 - \5) * -2 ; x alignment (x coordinate of player when entering map)
-	dw $C6E9 + (\3 * (\2 + 6)) ; window (position of the upper left block after entering the map)
+	dw wOverworldMap + 1 + (\3 * (\2 + 6)) ; window (position of the upper left block after entering the map)
 ENDM
 
 ;\1 (byte)  = connected map id
@@ -304,12 +512,12 @@ ENDM
 SOUTH_MAP_CONNECTION: MACRO
 	db \1 ; map id
 	dw \6 + \4 ; "Conection Strip" location
-	dw $C6EB + (\8 + 3) * (\7 + 6) + \3 ; current map positoin
+	dw wOverworldMap + 3 + (\8 + 3) * (\7 + 6) + \3 ; current map positoin
 	db \5 ; width of connection strip
 	db \2 ; map width
 	db 0  ; y alignment (y coordinate of player when entering map)
 	db (\3 - \4) * -2 ; x alignment (x coordinate of player when entering map)
-	dw $C6EF + \2 ; window (position of the upper left block after entering the map)
+	dw wOverworldMap + 7 + \2 ; window (position of the upper left block after entering the map)
 ENDM
 
 ;\1 (byte)  = connected map id
@@ -322,12 +530,12 @@ ENDM
 EAST_MAP_CONNECTION: MACRO
 	db \1 ; map id
 	dw \6 + (\2 * \4) ; "Connection Strip" location
-	dw $C6E5 + (\7 + 6) * (\3 + 4) ; current map position
+	dw wOverworldMap - 3 + (\7 + 6) * (\3 + 4) ; current map position
 	db \5 ; height of connection strip
 	db \2 ; map width
 	db (\3 - \4) * -2 ; y alignment
 	db 0 ; x alignment
-	dw $C6EF + \2 ; window (position of the upper left block after entering the map)
+	dw wOverworldMap + 7 + \2 ; window (position of the upper left block after entering the map)
 ENDM
 
 ;\1 (byte)  = connected map id
@@ -340,10 +548,10 @@ ENDM
 WEST_MAP_CONNECTION: MACRO
 	db \1 ; map id
 	dw \6 + (\2 * \4) + \2 - 3 ; "Connection Strip" location
-	dw $C6E8 + (\7 + 6) * (\3 + 3) ; current map position
+	dw wOverworldMap + (\7 + 6) * (\3 + 3) ; current map position
 	db \5 ; height of connection strip
 	db \2 ; map width
 	db (\3 - \4) * -2 ; y alignment
 	db (\2 * 2) - 1 ; x alignment
-	dw $C6EE + (2 * \2) ; window (position of the upper left block after entring the map)
+	dw wOverworldMap + 6 + (2 * \2) ; window (position of the upper left block after entring the map)
 ENDM

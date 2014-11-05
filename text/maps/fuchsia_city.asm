@@ -58,7 +58,11 @@ _FuchsiaCityText18:: ; a6011 (29:6011)
 	cont "LEADER: KOGA"
 
 	para "The Poisonous"
+IF DEF(_YELLOW)
+	line "Ninja Master!"
+ELSE
 	line "Ninja Master"
+ENDC
 	done
 
 _FuchsiaCityChanseyText:: ; a6050 (29:6050)
@@ -114,7 +118,7 @@ _FuchsiaCityKabutoText:: ; a6191 (29:6191)
 	cont "from a fossil."
 	prompt
 
-_UnnamedText_19b2a:: ; a61ca (29:61ca)
+_FuchsiaCityText_19b2a:: ; a61ca (29:61ca)
 	text "..."
 	done
 

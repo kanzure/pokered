@@ -1,4 +1,4 @@
-_UnnamedText_74ace:: ; 95e09 (25:5e09)
+_ViridianGymText_74ace:: ; 95e09 (25:5e09)
 	text "Fwahahaha! This is"
 	line "my hideout!"
 
@@ -18,7 +18,7 @@ _UnnamedText_74ace:: ; 95e09 (25:5e09)
 	cont "greatest trainer!"
 	done
 
-_UnnamedText_74ad3:: ; 95ed5 (25:5ed5)
+_ViridianGymText_74ad3:: ; 95ed5 (25:5ed5)
 	text "Ha!"
 	line "That was a truly"
 	cont "intense fight!"
@@ -26,7 +26,7 @@ _UnnamedText_74ad3:: ; 95ed5 (25:5ed5)
 	cont "As proof, here is"
 	cont "the EARTHBADGE!@@"
 
-_UnnamedText_74ad9:: ; 95f2b (25:5f2b)
+_ViridianGymText_74ad9:: ; 95f2b (25:5f2b)
 	text "Having lost, I"
 	line "cannot face my"
 	cont "underlings!"
@@ -38,7 +38,11 @@ _UnnamedText_74ad9:: ; 95f2b (25:5f2b)
 	cont "of #MON!"
 
 	para "Let us meet again"
+IF DEF(_YELLOW)
+	line "someday!"
+ELSE
 	line "some day!"
+ENDC
 	cont "Farewell!@@"
 
 _ViridianGymText12:: ; 95fcc (25:5fcc)
@@ -205,13 +209,17 @@ _ViridianGymEndBattleText8:: ; 96403 (25:6403)
 	prompt
 
 _ViridianGymAfterBattleText8:: ; 96412 (25:6412)
+IF DEF(_YELLOW)
+	text "You can go on to"
+ELSE
 	text "You can go onto"
+ENDC
 	line "#MON LEAGUE"
 	cont "only by defeating"
 	cont "our GYM LEADER!"
 	done
 
-_UnnamedText_74bd4:: ; 96451 (25:6451)
+_ViridianGymText_74bd4:: ; 96451 (25:6451)
 	text "Yo! Champ in"
 	line "making!"
 
@@ -229,7 +237,7 @@ _UnnamedText_74bd4:: ; 96451 (25:6451)
 	cont "#MON!"
 	done
 
-_UnnamedText_74bd9:: ; 964fb (25:64fb)
+_ViridianGymText_74bd9:: ; 964fb (25:64fb)
 	text "Blow me away!"
 	line "GIOVANNI was the"
 	cont "GYM LEADER here?"

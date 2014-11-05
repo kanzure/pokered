@@ -39,29 +39,33 @@ _SSAnne6Text6:: ; 811c9 (20:51c9)
 	cont "Snivel..."
 	done
 
-_UnnamedText_61807:: ; 81203 (20:5203)
+_SSAnne6Text_61807:: ; 81203 (20:5203)
 	text "Er-hem! Indeed I"
 	line "am le CHEF!"
 
 	para "Le main course is"
 	prompt
 
-_UnnamedText_6180c:: ; 81233 (20:5233)
+_SSAnne6Text_6180c:: ; 81233 (20:5233)
+IF DEF(_YELLOW)
+	text "Salade de Salmon!"
+ELSE
 	text "Salmon du Salad!"
+ENDC
 
 	para "Les guests may"
 	line "gripe it's fish"
 	cont "again, however!"
 	done
 
-_UnnamedText_61811:: ; 81273 (20:5273)
+_SSAnne6Text_61811:: ; 81273 (20:5273)
 	text "Eels au Barbecue!"
 
 	para "Les guests will"
 	line "mutiny, I fear."
 	done
 
-_UnnamedText_61816:: ; 812a6 (20:52a6)
+_SSAnne6Text_61816:: ; 812a6 (20:52a6)
 	text "Prime Beef Steak!"
 
 	para "But, have I enough"

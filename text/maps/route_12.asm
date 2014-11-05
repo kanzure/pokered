@@ -3,14 +3,14 @@ _Route12Text1:: ; 9009e (24:409e)
 	line "blocks the way!"
 	done
 
-_UnnamedText_596eb:: ; 900bf (24:40bf)
+_Route12Text13:: ; 900bf (24:40bf)
 	text "SNORLAX woke up!"
 
 	para "It attacked in a"
 	line "grumpy rage!"
 	done
 
-_UnnamedText_596f0:: ; 900ef (24:40ef)
+_Route12Text14:: ; 900ef (24:40ef)
 	text "SNORLAX calmed"
 	line "down! With a big"
 	cont "yawn, it returned"
@@ -109,7 +109,11 @@ _Route12EndBattleText6:: ; 90318 (24:4318)
 _Route12AfterBattleText6:: ; 90329 (24:4329)
 	text "It's all right."
 	line "Losing doesn't"
+IF DEF(_YELLOW)
+	cont "bug me anymore."
+ELSE
 	cont "bug me any more."
+ENDC
 	done
 
 _Route12BattleText7:: ; 90358 (24:4358)

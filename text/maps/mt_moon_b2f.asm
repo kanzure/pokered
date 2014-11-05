@@ -1,24 +1,47 @@
-_UnnamedText_49f24:: ; 8095e (20:495e)
+IF DEF(_YELLOW)
+_MtMoonJessieJamesText1::
+	text "Stop right there!@@"
+
+_MtMoonJessieJamesText2::
+	text "That fossil is"
+	line "TEAM ROCKET's!"
+
+	para "Surrender now, or"
+	line "prepare to fight!"
+	done
+
+_MtMoonJessieJamesText3::
+	text "A"
+	line "brat beat us?"
+	prompt
+
+_MtMoonJessieJamesText4::
+	text "TEAM ROCKET, blast"
+	line "off at the speed"
+	cont "of light!@@"
+ENDC
+
+_MtMoon3Text_49f24:: ; 8095e (20:495e)
 	text "You want the"
 	line "DOME FOSSIL?"
 	done
 
-_UnnamedText_49f64:: ; 80979 (20:4979)
+_MtMoon3Text_49f64:: ; 80979 (20:4979)
 	text "You want the"
 	line "HELIX FOSSIL?"
 	done
 
-_UnnamedText_49f6f:: ; 80995 (20:4995)
+_MtMoon3Text_49f6f:: ; 80995 (20:4995)
 	text $52, " got the"
 	line "@"
-	TX_RAM $cf4b
+	TX_RAM wcf4b
 	text "!@@"
 
-_UnnamedText_49f7f:: ; 809a8 (20:49a8)
+_MtMoon3Text_49f7f:: ; 809a8 (20:49a8)
 	text "Look, you've got"
 	line "no room for this.@@"
 
-_UnnamedText_49f85:: ; 809cc (20:49cc)
+_MtMoon3Text_49f85:: ; 809cc (20:49cc)
 	text "Hey, stop!"
 
 	para "I found these"
@@ -26,18 +49,18 @@ _UnnamedText_49f85:: ; 809cc (20:49cc)
 	cont "both mine!"
 	done
 
-_UnnamedText_49f8a:: ; 80a01 (20:4a01)
+_MtMoon3Text_49f8a:: ; 80a01 (20:4a01)
 	text "OK!"
 	line "I'll share!"
 	prompt
 
-_UnnamedText_49f8f:: ; 80a11 (20:4a11)
+_MtMoon3Text_49f8f:: ; 80a11 (20:4a11)
 	text "We'll each take"
 	line "one!"
 	cont "No being greedy!"
 	done
 
-_UnnamedText_49f94:: ; 80a37 (20:4a37)
+_MtMoon3Text_49f94:: ; 80a37 (20:4a37)
 	text "Far away, on"
 	line "CINNABAR ISLAND,"
 	cont "there's a #MON"
@@ -48,7 +71,7 @@ _UnnamedText_49f94:: ; 80a37 (20:4a37)
 	cont "fossils."
 	done
 
-_UnnamedText_49f99:: ; 80a93 (20:4a93)
+_MtMoon3Text_49f99:: ; 80a93 (20:4a93)
 	text "All right. Then"
 	line "this is mine!@@"
 
@@ -120,4 +143,3 @@ _MtMoon3AfterBattleText5:: ; 80c46 (20:4c46)
 	line "here long before"
 	cont "people came."
 	done
-

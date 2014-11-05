@@ -19,7 +19,11 @@ _Route16BattleText2:: ; 910d7 (24:50d7)
 	done
 
 _Route16EndBattleText2:: ; 910f1 (24:50f1)
+IF DEF(_YELLOW)
+	text "Knock-"
+ELSE
 	text "Knock"
+ENDC
 	line "out!"
 	prompt
 
@@ -95,14 +99,14 @@ _Route16Text7:: ; 91287 (24:5287)
 	line "blocks the way!"
 	done
 
-_UnnamedText_59ab3:: ; 912a8 (24:52a8)
+_Route16Text10:: ; 912a8 (24:52a8)
 	text "SNORLAX woke up!"
 
 	para "It attacked in a"
 	line "grumpy rage!"
 	done
 
-_UnnamedText_59ab8:: ; 912d8 (24:52d8)
+_Route16Text11:: ; 912d8 (24:52d8)
 	text "With a big yawn,"
 	line "SNORLAX returned"
 	cont "to the mountains!"

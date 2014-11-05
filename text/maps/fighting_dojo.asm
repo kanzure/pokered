@@ -1,4 +1,4 @@
-_UnnamedText_5ce8e:: ; a1852 (28:5852)
+_FightingDojoText_5ce8e:: ; a1852 (28:5852)
 	text "Grunt!"
 
 	para "I am the KARATE"
@@ -12,12 +12,12 @@ _UnnamedText_5ce8e:: ; a1852 (28:5852)
 	para "Fwaaa!"
 	done
 
-_UnnamedText_5ce93:: ; a18ba (28:58ba)
+_FightingDojoText_5ce93:: ; a18ba (28:58ba)
 	text "Hwa!"
 	line "Arrgh! Beaten!"
 	prompt
 
-_UnnamedText_5ce98:: ; a18cf (28:58cf)
+_FightingDojoText_5ce98:: ; a18cf (28:58cf)
 	text "Indeed, I have"
 	line "lost!"
 
@@ -34,7 +34,7 @@ _UnnamedText_5ce98:: ; a18cf (28:58cf)
 	line "one you like!"
 	done
 
-_UnnamedText_5ce9d:: ; a1972 (28:5972)
+_FightingDojoText_5ce9d:: ; a1972 (28:5972)
 	text "Ho!"
 
 	para "Stay and train at"
@@ -114,13 +114,21 @@ _FightingDojoAfterBattleText4:: ; a1b1a (28:5b1a)
 
 _WantHitmonleeText:: ; a1b4a (28:5b4a)
 	text "You want the"
+IF DEF(_YELLOW)
+	line "hard-kicking"
+ELSE
 	line "hard kicking"
+ENDC
 	cont "HITMONLEE?"
 	done
 
 _WantHitmonchanText:: ; a1b70 (28:5b70)
 	text "You want the"
+IF DEF(_YELLOW)
+	line "piston-punching"
+ELSE
 	line "piston punching"
+ENDC
 	cont "HITMONCHAN?"
 	done
 

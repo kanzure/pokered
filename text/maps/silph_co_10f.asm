@@ -1,9 +1,9 @@
-_UnnamedText_5a1d3:: ; 84d8d (21:4d8d)
+_SilphCo10Text_5a1d3:: ; 84d8d (21:4d8d)
 	text "Waaaaa!"
 	cont "I'm scared!"
 	done
 
-_UnnamedText_5a1d8:: ; 84da1 (21:4da1)
+_SilphCo10Text_5a1d8:: ; 84da1 (21:4da1)
 	text "Please keep quiet"
 	line "about my crying!"
 	done
@@ -41,3 +41,28 @@ _SilphCo10AfterBattleText2:: ; 84e66 (21:4e66)
 	cont "Then go on home!"
 	done
 
+IF DEF(_YELLOW)
+_SilphCoJessieJamesText1::
+	text "Hold it right"
+	line "there, brat!@@"
+
+_SilphCoJessieJamesText2::
+	text "Our BOSS is in a"
+	line "meeting!"
+
+	para "You better not"
+	line "disturb him!"
+	done
+
+_SilphCoJessieJamesText3::
+	text "Like"
+	line "always..."
+	prompt
+
+_SilphCoJessieJamesText4::
+	text "TEAM ROCKET, blast"
+	line "off at the speed"
+	cont "of light!"
+
+	para "Again...@@"
+ENDC

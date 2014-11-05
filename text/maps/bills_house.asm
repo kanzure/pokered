@@ -1,4 +1,11 @@
-_UnnamedText_1e865:: ; 8d267 (23:5267)
+IF DEF(_YELLOW)
+_BillsHouseDontLeaveText::
+	text "Whoa, don't go"
+	line "anywhere, wait!"
+	done
+ENDC
+
+_BillsHouseText_1e865:: ; 8d267 (23:5267)
 	text "Hiya! I'm a"
 	line "#MON..."
 	cont "...No I'm not!"
@@ -19,7 +26,7 @@ _UnnamedText_1e865:: ; 8d267 (23:5267)
 	line "Help me out here!"
 	done
 
-_UnnamedText_1e86a:: ; 8d345 (23:5345)
+_BillsHouseText_1e86a:: ; 8d345 (23:5345)
 	text "When I'm in the"
 	line "TELEPORTER, go to"
 	cont "my PC and run the"
@@ -27,7 +34,7 @@ _UnnamedText_1e86a:: ; 8d345 (23:5345)
 	cont "System!"
 	done
 
-_UnnamedText_1e86f:: ; 8d391 (23:5391)
+_BillsHouseText_1e86f:: ; 8d391 (23:5391)
 	text "No!? Come on, you"
 	line "gotta help a guy"
 	cont "in deep trouble!"
@@ -56,7 +63,7 @@ _BillThankYouText:: ; 8d3f5 (23:53f5)
 _SSTicketReceivedText:: ; 8d499 (23:5499)
 	text $52, " received"
 	line "an @"
-	TX_RAM $cf4b
+	TX_RAM wcf4b
 	text "!@@"
 
 _SSTicketNoRoomText:: ; 8d4b0 (23:54b0)
@@ -64,7 +71,7 @@ _SSTicketNoRoomText:: ; 8d4b0 (23:54b0)
 	line "much stuff, bud!"
 	done
 
-_UnnamedText_1e8cb:: ; 8d4d0 (23:54d0)
+_BillsHouseText_1e8cb:: ; 8d4d0 (23:54d0)
 	text "That cruise ship,"
 	line "S.S.ANNE, is in"
 	cont "VERMILION CITY."
@@ -79,7 +86,7 @@ _UnnamedText_1e8cb:: ; 8d4d0 (23:54d0)
 	cont "instead of me?"
 	done
 
-_UnnamedText_1e8da:: ; 8d57f (23:557f)
+_BillsHouseText_1e8da:: ; 8d57f (23:557f)
 	text "BILL: Look, bud,"
 	line "just check out"
 	cont "some of my rare"
