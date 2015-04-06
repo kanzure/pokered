@@ -1,3 +1,7 @@
+# This project moved to [iimarckus/pokered](https://github.com/iimarckus/pokered)! You’re looking at an old version of the code.
+
+----
+
 # Pokémon Red
 
 This is a disassembly of Pokémon Red.
